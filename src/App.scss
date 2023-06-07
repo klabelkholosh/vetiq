@@ -1,0 +1,566 @@
+/* ------------------------------ */
+/* Variables
+/* ------------------------------ */
+
+$react-markdown-font-size: 20px;
+$dog-color-fur-edge: #bfb48c;
+$dog-color-eye: #260f02;
+$dog-color-body: #c49152;
+$dog-color-body-dark: #9d7442;
+$dog-color-body-light: #cca069;
+$dog-color-ear-bg: #c49152e1;
+$dog-color-fur: #efe1af;
+$dog-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+$dog-total-kf: 5;
+$dog-duration: 5s;
+$dog-right-margin: 20px;
+
+$dog-k-bounce-down: (0, 1, 2, 3, 4, 6, 7, 8, 9, $dog-total-kf);
+$dog-k-bounce-up: (0.5, 1.5, 2.5, 3.5, 6.5, 7.5, 8.5, 9.5);
+
+$dog-k-bounce-down-nopause: (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5);
+$dog-k-bounce-up-nopause: (
+  0.25,
+  0.75,
+  1.25,
+  1.75,
+  2.25,
+  2.75,
+  3.25,
+  3.75,
+  4.25,
+  4.75
+);
+
+$dog-k-ear-jiggle-opa1: (0, 1, 2, 3, 4, 6, 7, 8, 9, $dog-total-kf);
+$dog-k-ear-jiggle-opa2: (2.5, 3.5, 8.5, 9.5, $dog-total-kf);
+$dog-k-ear-jiggle-opa3: (2.75, 3.75, 8.75, 9.75, $dog-total-kf);
+$dog-k-ear-jiggle-final1: (4.15, $dog-total-kf);
+$dog-k-ear-jiggle-final2: (4.275, $dog-total-kf);
+$dog-k-ear-jiggle-final3: (4.55, $dog-total-kf);
+$dog-k-ear-jiggle-final4: (4.725, $dog-total-kf);
+$dog-k-ear-jiggle-final5: (5, $dog-total-kf);
+
+$dog-kf-body: (
+  $dog-k-bounce-down: translateY(1%),
+  $dog-k-bounce-up: translateY(0),
+  4.5: translateY(4%),
+  5: translateY(0),
+);
+
+$dog-kf-head: (
+  $dog-k-bounce-down: translateY(1%),
+  $dog-k-bounce-up: translateY(0),
+  4.5: translateY(4%),
+  5: translateY(0),
+);
+
+$dog-kf-ear-left: (
+  $dog-k-bounce-down: rotate(-16deg),
+  $dog-k-bounce-up: rotate(0deg),
+);
+
+$dog-kf-ear-right: (
+  $dog-k-bounce-down: rotate(16deg),
+  $dog-k-bounce-up: rotate(0deg),
+);
+
+$dog-kf-ear-jiggle: (
+  $dog-k-ear-jiggle-opa1: rotate(0deg),
+  $dog-k-ear-jiggle-opa2: rotate(-10deg),
+  $dog-k-ear-jiggle-opa3: rotate(10deg),
+  $dog-k-ear-jiggle-final1: rotate(0deg),
+  $dog-k-ear-jiggle-final2: rotate(15deg),
+  $dog-k-ear-jiggle-final3: rotate(0deg),
+  $dog-k-ear-jiggle-final4: rotate(15deg),
+  $dog-k-ear-jiggle-final5: rotate(0deg),
+);
+
+$dog-kf-eye: (
+  4.5: opacity 0,
+  5: translateY(0),
+);
+
+$dog-kf-tail: (
+  $dog-k-bounce-down-nopause: rotate(-16deg),
+  $dog-k-bounce-up-nopause: rotate(16deg),
+);
+
+$dog-kf-mouth-talking: (
+  $dog-k-bounce-down-nopause: rotateX(90deg),
+  $dog-k-bounce-up-nopause: rotateX(0deg),
+);
+
+body {
+  font-family: 'Work Sans', sans-serif;
+
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #e0a5d6;
+  opacity: 1;
+  background: linear-gradient(135deg, #e0a5d6 25%, transparent 25%) -10px 0/
+      20px 20px,
+    linear-gradient(225deg, #e0a5d6 25%, transparent 25%) -10px 0/ 20px 20px,
+    linear-gradient(315deg, #e0a5d6 25%, transparent 25%) 0px 0/ 20px 20px,
+    linear-gradient(45deg, #e0a5d6 25%, #f4c0eb 25%) 0px 0/ 20px 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+
+  border-radius: 20px;
+  background-color: #468c98;
+  width: 50vw;
+  height: 80vh;
+  padding: 50px 80px;
+}
+
+form {
+  flex: 1;
+  margin: 20px 0;
+  padding: 0 0;
+
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #476c9b;
+  color: #add9f4;
+}
+
+textarea::placeholder {
+  color: #add9f4;
+}
+
+button {
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: 8px;
+  font-size: 24px;
+  margin-top: 10px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #984447;
+  color: #add9f4;
+}
+
+img {
+  width: 20vw;
+  margin: 0px;
+  padding: 0px;
+  align-self: center;
+}
+
+.reactMarkdown {
+  overflow: auto;
+  border-radius: 10px;
+  width: 100%;
+  font-size: $react-markdown-font-size;
+  background-color: #377297;
+  color: #add9f4;
+  margin-bottom: 100px;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    margin: 10vw;
+    margin-bottom: 20vh;
+  }
+
+  p {
+    flex: 1;
+    color: #add9f4;
+    font-size: $react-markdown-font-size;
+    overflow: auto;
+    padding: 20px;
+    @media screen and (max-width: 768px) {
+      padding: 0vh 0vw;
+      margin: 5vh 5vw;
+    }
+  }
+
+  ol {
+    font-size: $react-markdown-font-size;
+
+    li {
+      font-size: $react-markdown-font-size;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  img {
+    width: 180px;
+  }
+
+  .container {
+    height: 100vh;
+    width: 100vw;
+    padding: 0 0;
+    overflow: none;
+    border-radius: 0px;
+  }
+
+  form {
+    margin: 0 auto;
+  }
+}
+
+/* ------------------------------ */
+/* DogCSS (animated dog) CSS
+/* ------------------------------ */
+
+@mixin effect($name, $kf) {
+  @keyframes #{$name} {
+    @each $intervals, $transform in $kf {
+      @each $interval in $intervals {
+        #{percentage($interval/$dog-total-kf)} {
+          @if type-of($transform) == 'map' {
+            @each $key, $val in $transform {
+              #{$key}: $val;
+            }
+          } @else {
+            transform: $transform;
+          }
+        }
+      }
+    }
+  }
+}
+
+@function animFunc($name, $delay: 0s) {
+  @return $name $dog-duration $delay $dog-easing both infinite;
+}
+
+@include effect(body, $dog-kf-body);
+@include effect(head, $dog-kf-head);
+@include effect(nose, $dog-kf-body);
+@include effect(ear--left, $dog-kf-ear-left);
+@include effect(ear--right, $dog-kf-ear-right);
+@include effect(ear--tops, $dog-kf-ear-jiggle);
+@include effect(eye, $dog-kf-eye);
+@include effect(tail, $dog-kf-tail);
+@include effect(mouth--talking, $dog-kf-mouth-talking);
+
+.dog {
+  height: 325px;
+  width: 40vw;
+  margin-right: clamp(10px, calc(100px - 5vw), 100px);
+  position: fixed;
+  bottom: 0;
+  right: -7.5%;
+  @media (max-width: 768px) {
+    transform: scale(0.8);
+    margin-right: 40px;
+    right: 0%;
+    bottom: -5vh;
+  }
+  * {
+    position: absolute;
+  }
+}
+
+.body {
+  animation: animFunc(body);
+  height: 100px;
+  position: absolute;
+  width: 125px;
+  top: 164px;
+  left: 140px;
+  background: $dog-color-body;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 30%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 70%;
+  box-shadow: inset -15px 0 0 $dog-color-body-dark;
+}
+
+.head {
+  animation: animFunc(head);
+  height: 0px;
+  position: absolute;
+  width: 0px;
+  top: 160px;
+  left: 140px;
+}
+
+// neck section
+.neck {
+  content: '';
+  animation: animFunc(head);
+  height: 50px;
+  position: absolute;
+  width: 50px;
+  top: -17.5px;
+  left: 10px;
+  background: $dog-color-body;
+  box-shadow: inset -15px 0 0 $dog-color-body-dark;
+}
+
+.face {
+  animation: animFunc(head);
+  height: 70px;
+  position: absolute;
+  width: 70px;
+  top: -72px;
+  left: -10px;
+  background: $dog-color-body;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: inset -15px 0 0 $dog-color-body-dark;
+}
+
+.face:after {
+  content: '';
+  position: absolute;
+  background-color: $dog-color-body;
+}
+
+// snout section
+.face:after {
+  width: 40%;
+  left: -20%;
+  height: 50%;
+  border-top-right-radius: 100% 100%;
+  border-bottom-left-radius: 100% 100%;
+
+  top: 50%;
+  border-top-left-radius: 100% 50%;
+  border-bottom-right-radius: 100% 100%;
+}
+
+.nose {
+  animation: animFunc(nose);
+  width: 30%;
+  left: -20%;
+  height: 25%;
+  top: 52%;
+  z-index: 2;
+  border-radius: 25px;
+  background-color: $dog-color-eye;
+}
+
+.nose:after {
+  content: '';
+  animation: animFunc(nose);
+  position: absolute;
+  width: 20%;
+  left: 20%;
+  height: 25%;
+  top: 10%;
+  z-index: 3;
+  border-radius: 25px;
+  background-color: #fff;
+}
+
+.ear {
+  height: 50px;
+  position: absolute;
+  width: 25px;
+  top: -104px;
+  left: 0px;
+
+  border-top-left-radius: 5%;
+  border-top-right-radius: 60%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 90%;
+  box-shadow: inset -5px 0 0 $dog-color-body;
+  transform-origin: bottom center;
+}
+
+.ear:after {
+  animation: animFunc(ear--tops);
+  content: '';
+  height: 10px;
+  width: 25px;
+  top: -1px;
+  left: -5px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 75%;
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 90%;
+
+  transform: rotate(-10deg);
+  position: absolute;
+  background: $dog-color-body;
+}
+
+.ear--left {
+  animation: animFunc(ear--left);
+  background: $dog-color-body-dark;
+}
+
+.ear--right {
+  animation: animFunc(ear--right);
+  background: $dog-color-body-dark;
+  left: 30px;
+}
+
+.eye {
+  width: 8%;
+  height: 8%;
+  position: absolute;
+  left: 20%;
+  top: 30%;
+  border-radius: 25px;
+  background-color: $dog-color-eye;
+  -webkit-animation: dog-eye 1800ms infinite;
+  animation: dog-eye 1800ms infinite;
+}
+
+.eye--left {
+  left: 20%;
+}
+
+.eye--right {
+  left: 40%;
+}
+
+@-webkit-keyframes dog-eye {
+  from,
+  to {
+    -webkit-animation-timing-function: step-end;
+    animation-timing-function: step-end;
+    opacity: 1;
+  }
+  50%,
+  55% {
+    -webkit-animation-timing-function: step-start;
+    animation-timing-function: step-start;
+    opacity: 0;
+  }
+}
+@keyframes dog-eye {
+  from,
+  to {
+    -webkit-animation-timing-function: step-end;
+    animation-timing-function: step-end;
+    opacity: 1;
+  }
+  50%,
+  55% {
+    -webkit-animation-timing-function: step-start;
+    animation-timing-function: step-start;
+    opacity: 0;
+  }
+}
+
+.mouth {
+  background-color: transparent;
+  border-color: #000;
+  width: 44%;
+  border-style: solid;
+  border-width: 0.3vmin;
+  height: 38%;
+  z-index: 6;
+  position: absolute;
+  bottom: 5%;
+  left: 14%;
+  border-top-color: transparent;
+  border-bottom-left-radius: 72% 100%;
+  border-bottom-right-radius: 77% 100%;
+  border-right-color: transparent;
+  border-top-right-radius: 50%;
+  border-left-color: transparent;
+  transform: rotate(-41deg);
+}
+
+.mouth--talking {
+  animation: animFunc(mouth--talking);
+  background-color: transparent;
+  border-color: #fff;
+  width: 24%;
+  border-style: solid;
+  border-width: 0.3vmin;
+  height: 8%;
+  z-index: 6;
+  position: absolute;
+  bottom: 5%;
+  left: 34%;
+  background: #fff;
+  border-top-color: #fff;
+  border-bottom-left-radius: 100% 100%;
+  border-bottom-right-radius: 100% 100%;
+  border-right-color: #fff;
+  border-top-right-radius: 50%;
+  border-left-color: #fff;
+  transform: rotate(0deg);
+}
+
+.tail {
+  animation: animFunc(tail);
+  height: 50px;
+  position: absolute;
+  width: 25px;
+  top: 125px;
+  left: 225px;
+
+  border-top-left-radius: 5%;
+  border-top-right-radius: 60%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 90%;
+  background: $dog-color-body;
+  box-shadow: inset -5px 0 0 $dog-color-body-dark;
+  transform-origin: bottom center;
+}
+
+.leg-front {
+  animation: animFunc(head);
+
+  position: absolute;
+  width: 20px;
+  top: 230px;
+
+  background: $dog-color-body;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: inset -10px 0 0 $dog-color-body-dark;
+}
+
+.leg-front--left {
+  left: 150px;
+  height: 40px;
+}
+
+.leg-front--right {
+  left: 170px;
+  height: 45px;
+}
+
+.leg-back {
+  animation: animFunc(head);
+
+  position: absolute;
+  width: 20px;
+  top: 230px;
+
+  background: $dog-color-body;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: inset -10px 0 0 $dog-color-body-dark;
+}
+
+.leg-back--left {
+  left: 220px;
+  height: 40px;
+}
+
+.leg-back--right {
+  left: 240px;
+  height: 65px;
+  top: 205px;
+}
