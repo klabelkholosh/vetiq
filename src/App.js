@@ -3,6 +3,7 @@ import './App.scss';
 import logo from './vetiq.svg';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import DogCSS from './components/DogCSS';
+// import { BACKEND_URL } from './consts/consts';
 
 export default function App() {
   const [prompt, setPrompt] = React.useState('');
@@ -10,6 +11,7 @@ export default function App() {
   const [loading, setLoading] = React.useState(false);
   const [talking, setTalking] = React.useState(false);
 
+  console.log('hi!', process.env.REACT_APP_BACKEND_URL);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!loading) {
@@ -17,7 +19,7 @@ export default function App() {
       setLoading(true);
 
       const sse = new EventSource(
-        `http://localhost:8080/chat?prompt=${prompt}`
+        `${process.env.BACKEND_URL}?prompt=${prompt}`
       );
 
       sse.addEventListener('message', (res) => {
