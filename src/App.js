@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.scss';
-import logo from './vetiq.svg';
+import './styles/App.scss';
+import logo from './images/vetiq.svg';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import DogCSS from './components/DogCSS';
 
@@ -10,38 +10,54 @@ export default function App() {
   const [loading, setLoading] = React.useState(false);
   const [talking, setTalking] = React.useState(false);
 
+  // sending our prompt to the backend!
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!loading) {
       setResponse('');
       setLoading(true);
 
+      // open a new eventsource, at our self-hosted chatgpt-querying backend api point..
       const sse = new EventSource(
         `${process.env.REACT_APP_BACKEND_URL}?prompt=${prompt}`
       );
 
+      // if we get a message (chunk/token of the ChatGPT response) sent, start showing it..
       sse.addEventListener('message', (res) => {
-        // console.log('res:', JSON.parse(res.data)['text']);
         let updateMsg = JSON.parse(res.data)['text'];
         if (updateMsg !== '[[DONE]]') {
+          // continue adding to response, dog is now talking..
           setTalking(true);
           setResponse((r) => r + updateMsg);
         } else {
+          // response is done, dog stops talking, and close the eventsource!
           setTalking(false);
           setLoading(false);
-          console.log('sse closed');
           sse.close(); // very important ...
         }
+      });
+
+      // if there's an error, close the connection
+      sse.addEventListener('error', (e) => {
+        setTalking(false);
+        setLoading(false);
+        sse.close();
+        setResponse(
+          'Oops.. I&#39;m having an issue contacting the server! Please try again later.'
+        );
+        console.log('An error occurred while attempting to connect:', e);
       });
     }
   };
 
+  // so that we can press enter on the textarea to submit our prompt!
   const promptEnter = (e) => {
     if (e.key === 'Enter' && e.shiftKey === false) {
       handleSubmit(e);
     }
   };
 
+  // this is a custom const that ensures we always continually scroll to the bottom of the output chat box
   const AlwaysScrollToBottom = () => {
     const elementRef = React.useRef();
     React.useEffect(() =>
@@ -67,7 +83,7 @@ export default function App() {
           autoFocus
           placeholder="Describe your pet&#39;s symptoms here"
         />
-        <button type="submit">Diagnose!</button>
+        <button type="submit">{loading ? 'Thinking...' : 'Diagnose!'}</button>
         <DogCSS talking={talking}></DogCSS>
       </form>
 
