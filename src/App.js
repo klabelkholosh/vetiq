@@ -18,7 +18,7 @@ export default function App() {
       setLoading(true);
 
       const sse = new EventSource(
-        `${'https://95.179.197.174/chat'}?prompt=${prompt}`
+        `${process.env.REACT_APP_BACKEND_URL}?prompt=${prompt}`
       );
 
       sse.addEventListener('message', (res) => {
