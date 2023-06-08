@@ -11,7 +11,6 @@ export default function App() {
   const [loading, setLoading] = React.useState(false);
   const [talking, setTalking] = React.useState(false);
 
-  console.log('hi!', process.env.REACT_APP_BACKEND_URL);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!loading) {
@@ -19,7 +18,7 @@ export default function App() {
       setLoading(true);
 
       const sse = new EventSource(
-        `${process.env.BACKEND_URL}?prompt=${prompt}`
+        `${'https://vetiq-backend.vercel.app/chat'}?prompt=${prompt}`
       );
 
       sse.addEventListener('message', (res) => {
