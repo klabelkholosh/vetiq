@@ -18,7 +18,7 @@ export default function App() {
       setLoading(true);
 
       const sse = new EventSource(
-        `${'http://95.179.197.174/chat'}?prompt=${prompt}`
+        `${'https://95.179.197.174/chat'}?prompt=${prompt}`
       );
 
       sse.addEventListener('message', (res) => {
