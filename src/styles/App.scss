@@ -120,6 +120,8 @@ body {
     linear-gradient(225deg, #e0a5d6 25%, transparent 25%) -10px 0/ 20px 20px,
     linear-gradient(315deg, #e0a5d6 25%, transparent 25%) 0px 0/ 20px 20px,
     linear-gradient(45deg, #e0a5d6 25%, #f4c0eb 25%) 0px 0/ 20px 20px;
+
+  overflow: hidden;
 }
 
 .container {
@@ -244,7 +246,9 @@ img {
 }
 
 .helpIcon {
-  align-self: flex-start;
+  position: fixed;
+  bottom: 10%;
+  left: 25%;
   font-size: 24px;
   color: $react-markdown-textcolor;
   background-color: transparent;
@@ -256,29 +260,23 @@ img {
   border-color: $react-markdown-textcolor;
   border-style: solid;
   border-width: 0.03vmin;
-  height: 30px;
+  overflow: hidden;
   width: 12px;
   transition: width 0.2s;
-  transition: height 0.2s;
-  overflow: auto;
   @media screen and (max-width: 768px) {
-    margin-left: 40px;
-    margin-bottom: 30px;
+    bottom: 5%;
+    left: 10%;
   }
 }
 
 .helpIcon:hover {
-  height: 60px;
-  max-height: 40px;
   width: 25vw;
   font-size: 16px;
   border-radius: 15px;
   padding: 12px;
   text-align: left;
-
+  overflow: hidden;
   @media screen and (max-width: 768px) {
-    height: 100px;
-    max-height: 160px;
   }
 }
 
