@@ -9,6 +9,7 @@ export default function App() {
   const [response, setResponse] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [talking, setTalking] = React.useState(false);
+  const [helpContent, setHelpContent] = React.useState('?');
 
   // sending our prompt to the backend!
   const handleSubmit = (e) => {
@@ -90,6 +91,18 @@ export default function App() {
       <span className="reactMarkdown">
         <ReactMarkdown>{response}</ReactMarkdown>
         <AlwaysScrollToBottom />
+      </span>
+
+      <span
+        className="helpIcon"
+        onMouseOver={() =>
+          setHelpContent(
+            "This is a BETA - responses aren't medical advice, and could be weird. Working on it!"
+          )
+        }
+        onMouseOut={() => setHelpContent('?')}
+      >
+        {helpContent}
       </span>
     </div>
   );

@@ -2,6 +2,10 @@
 /* Variables
 /* ------------------------------ */
 
+$color-logodark: #1a1b1d;
+$color-font-main: #add9f4;
+$color-textarea-bgcolor: #476c9b;
+
 $react-markdown-font-size: 20px;
 $react-markdown-bgcolor: #72a580;
 $react-markdown-textcolor: #bbffdfcc;
@@ -148,12 +152,17 @@ textarea {
   letter-spacing: 4px;
   padding: 20px;
   border-radius: 10px;
-  background-color: #476c9b;
-  color: #add9f4;
+  border-color: $color-textarea-bgcolor;
+  background-color: $color-textarea-bgcolor;
+  color: $color-font-main;
 }
 
 textarea::placeholder {
-  color: #add9f4;
+  color: $color-font-main;
+}
+
+textarea:focus {
+  outline: none !important;
 }
 
 button {
@@ -164,7 +173,14 @@ button {
   border-radius: 20px;
   padding: 10px;
   background-color: #984447;
-  color: #add9f4;
+  color: $color-font-main;
+  border: 0;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none !important;
+  border-color: #719ece;
 }
 
 img {
@@ -224,6 +240,45 @@ img {
 
   form {
     margin: 0 auto;
+  }
+}
+
+.helpIcon {
+  align-self: flex-start;
+  font-size: 24px;
+  color: $react-markdown-textcolor;
+  background-color: transparent;
+  border-radius: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  cursor: pointer;
+  text-align: center;
+  border-color: $react-markdown-textcolor;
+  border-style: solid;
+  border-width: 0.03vmin;
+  height: 30px;
+  width: 12px;
+  transition: width 0.2s;
+  transition: height 0.2s;
+  overflow: auto;
+  @media screen and (max-width: 768px) {
+    margin-left: 40px;
+    margin-bottom: 30px;
+  }
+}
+
+.helpIcon:hover {
+  height: 60px;
+  max-height: 40px;
+  width: 25vw;
+  font-size: 16px;
+  border-radius: 15px;
+  padding: 12px;
+  text-align: left;
+
+  @media screen and (max-width: 768px) {
+    height: 100px;
+    max-height: 160px;
   }
 }
 
