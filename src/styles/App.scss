@@ -3,6 +3,9 @@
 /* ------------------------------ */
 
 $react-markdown-font-size: 20px;
+$react-markdown-bgcolor: #72a580;
+$react-markdown-textcolor: #bbffdfcc;
+
 $dog-color-fur-edge: #bfb48c;
 $dog-color-eye: #260f02;
 $dog-color-body: #c49152;
@@ -176,8 +179,8 @@ img {
   border-radius: 10px;
   width: 100%;
   font-size: $react-markdown-font-size;
-  background-color: #377297;
-  color: #add9f4;
+  background-color: $react-markdown-bgcolor;
+  color: $react-markdown-textcolor;
   margin-bottom: 100px;
   @media screen and (max-width: 768px) {
     width: 80%;
@@ -187,7 +190,7 @@ img {
 
   p {
     flex: 1;
-    color: #add9f4;
+    color: $react-markdown-textcolor;
     font-size: $react-markdown-font-size;
     overflow: auto;
     padding: 20px;
