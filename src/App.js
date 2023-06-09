@@ -13,7 +13,7 @@ export default function App() {
   // sending our prompt to the backend!
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!loading) {
+    if (!loading && prompt.trim() !== '') {
       setResponse('');
       setLoading(true);
 
