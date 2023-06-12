@@ -4,8 +4,8 @@
 
 $color-logodark: #1a1b1d;
 $color-font-main: #add9f4;
-$color-textarea-bgcolor: #476c9b;
-
+$color-textarea-bg: #476c9b;
+$color-container-bg: #468c98;
 $react-markdown-font-size: 20px;
 $react-markdown-bgcolor: #72a580;
 $react-markdown-textcolor: #bbffdfcc;
@@ -99,6 +99,46 @@ $dog-kf-mouth-talking: (
 );
 
 /* ------------------------------ */
+/* Mixins and functions
+/* ------------------------------ */
+
+@mixin effect($name, $kf) {
+  @keyframes #{$name} {
+    @each $intervals, $transform in $kf {
+      @each $interval in $intervals {
+        #{percentage($interval/$dog-total-kf)} {
+          @if type-of($transform) == 'map' {
+            @each $key, $val in $transform {
+              #{$key}: $val;
+            }
+          } @else {
+            transform: $transform;
+          }
+        }
+      }
+    }
+  }
+}
+
+@function animFunc($name, $delay: 0s) {
+  @return $name $dog-duration $delay $dog-easing both infinite;
+}
+
+/* ------------------------------ */
+/* Includes
+/* ------------------------------ */
+
+@include effect(body, $dog-kf-body);
+@include effect(head, $dog-kf-head);
+@include effect(nose, $dog-kf-body);
+@include effect(ear--left, $dog-kf-ear-left);
+@include effect(ear--right, $dog-kf-ear-right);
+@include effect(ear--tops, $dog-kf-ear-jiggle);
+@include effect(eye, $dog-kf-eye);
+@include effect(tail, $dog-kf-tail);
+@include effect(mouth--talking, $dog-kf-mouth-talking);
+
+/* ------------------------------ */
 /* Main element styles 
 /* ------------------------------ */
 
@@ -132,10 +172,17 @@ body {
   align-content: space-between;
 
   border-radius: 20px;
-  background-color: #468c98;
+  background-color: $color-container-bg;
   width: 50vw;
   height: 80vh;
   padding: 50px 80px;
+  @media screen and (max-width: 768px) {
+    height: 100vh;
+    width: 100vw;
+    padding: 0 0;
+    overflow: none;
+    border-radius: 0px;
+  }
 }
 
 form {
@@ -146,6 +193,9 @@ form {
   width: 50vw;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    margin: 0 auto;
+  }
 }
 
 textarea {
@@ -154,8 +204,8 @@ textarea {
   letter-spacing: 4px;
   padding: 20px;
   border-radius: 10px;
-  border-color: $color-textarea-bgcolor;
-  background-color: $color-textarea-bgcolor;
+  border-color: $color-textarea-bg;
+  background-color: $color-textarea-bg;
   color: $color-font-main;
 }
 
@@ -190,6 +240,9 @@ img {
   margin: 0px;
   padding: 0px;
   align-self: center;
+  @media screen and (max-width: 768px) {
+    width: 180px;
+  }
 }
 
 .reactMarkdown {
@@ -227,31 +280,12 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
-  img {
-    width: 180px;
-  }
-
-  .container {
-    height: 100vh;
-    width: 100vw;
-    padding: 0 0;
-    overflow: none;
-    border-radius: 0px;
-  }
-
-  form {
-    margin: 0 auto;
-  }
-}
-
 .helpIcon {
   position: fixed;
   bottom: 10%;
   left: 25%;
-  font-size: 24px;
   color: $react-markdown-textcolor;
-  background-color: transparent;
+  background-color: $color-container-bg;
   border-radius: 100%;
   padding-left: 8px;
   padding-right: 8px;
@@ -261,8 +295,9 @@ img {
   border-style: solid;
   border-width: 0.03vmin;
   overflow: hidden;
+  height: 28px;
   width: 12px;
-  transition: width 0.2s;
+  font-size: 24px;
   @media screen and (max-width: 768px) {
     bottom: 5%;
     left: 10%;
@@ -271,50 +306,29 @@ img {
 
 .helpIcon:hover {
   width: 25vw;
-  font-size: 16px;
   border-radius: 15px;
+  font-size: 16px;
   padding: 12px;
   text-align: left;
   overflow: hidden;
+  height: auto;
   @media screen and (max-width: 768px) {
   }
+  animation: helpIconAnim 0.25s 1 linear;
 }
 
+@keyframes helpIconAnim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 /* ------------------------------ */
 /* DogCSS (animated dog) CSS
 /* ------------------------------ */
-
-@mixin effect($name, $kf) {
-  @keyframes #{$name} {
-    @each $intervals, $transform in $kf {
-      @each $interval in $intervals {
-        #{percentage($interval/$dog-total-kf)} {
-          @if type-of($transform) == 'map' {
-            @each $key, $val in $transform {
-              #{$key}: $val;
-            }
-          } @else {
-            transform: $transform;
-          }
-        }
-      }
-    }
-  }
-}
-
-@function animFunc($name, $delay: 0s) {
-  @return $name $dog-duration $delay $dog-easing both infinite;
-}
-
-@include effect(body, $dog-kf-body);
-@include effect(head, $dog-kf-head);
-@include effect(nose, $dog-kf-body);
-@include effect(ear--left, $dog-kf-ear-left);
-@include effect(ear--right, $dog-kf-ear-right);
-@include effect(ear--tops, $dog-kf-ear-jiggle);
-@include effect(eye, $dog-kf-eye);
-@include effect(tail, $dog-kf-tail);
-@include effect(mouth--talking, $dog-kf-mouth-talking);
 
 .dog {
   height: 325px;
