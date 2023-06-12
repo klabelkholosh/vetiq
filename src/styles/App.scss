@@ -2,6 +2,8 @@
 /* Variables
 /* ------------------------------ */
 
+$font-size-textarea: 16px;
+$font-size-button: 20px;
 $color-logodark: #1a1b1d;
 $color-font-main: #add9f4;
 $color-textarea-bg: #476c9b;
@@ -200,7 +202,7 @@ form {
 
 textarea {
   font-family: 'Work Sans', sans-serif;
-  font-size: 16px;
+  font-size: $font-size-textarea;
   letter-spacing: 4px;
   padding: 20px;
   border-radius: 10px;
@@ -220,7 +222,7 @@ textarea:focus {
 button {
   font-family: 'Work Sans', sans-serif;
   letter-spacing: 8px;
-  font-size: 24px;
+  font-size: $font-size-button;
   margin-top: 10px;
   border-radius: 20px;
   padding: 10px;
