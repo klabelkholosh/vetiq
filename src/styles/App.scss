@@ -243,6 +243,7 @@ img {
   padding: 0px;
   align-self: center;
   @media screen and (max-width: 768px) {
+    padding-top: 50px;
     width: 180px;
   }
 }
@@ -639,4 +640,67 @@ img {
   left: 240px;
   height: 65px;
   top: 205px;
+}
+
+/* ------------------------------------------------------------*/
+/* Prompts and associated anims (ie. scroll prompt)
+/* ------------------------------------------------------------ */
+
+.scroll-prompt {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transition: 1s opacity ease-out;
+  visibility: visible;
+}
+
+/* when screen shrinks below 760, make menu a bit more mobile-friendly */
+@media screen and (max-width: 768px) {
+  .scroll-prompt {
+    visibility: visible;
+  }
+}
+
+.scroll-prompt .scroll-prompt-shape {
+  position: relative;
+  animation: slidedown 2.5s infinite;
+}
+
+.scroll-prompt .scroll-prompt-shape:before,
+.scroll-prompt .scroll-prompt-shape:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 2em;
+  height: 0.5em;
+  top: 0;
+  left: 0;
+  background: #fff;
+  border-radius: 0.7em 0.7em 0.7em 0.7em;
+  transform-origin: bottom, left;
+}
+
+.scroll-prompt .scroll-prompt-shape:before {
+  transform: scaleX(-1) rotate(-45deg) translate(15px, 15px);
+}
+.scroll-prompt .scroll-prompt-shape:after {
+  transform: rotate(-45deg);
+}
+
+@keyframes slidedown {
+  0% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+    transform: translate(0, 80px);
+  }
+  90% {
+    opacity: 0;
+    transform: translate(0, 80px);
+  }
+  100% {
+    opacity: 0;
+  }
 }

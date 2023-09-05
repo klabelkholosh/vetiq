@@ -11,6 +11,16 @@ export default function App() {
   const [talking, setTalking] = React.useState(false);
   const [helpContent, setHelpContent] = React.useState('?');
 
+  /*
+  React.useEffect(() => {
+    if (talking) {
+      console.log('currently talking');
+    } else {
+      console.log('NOT currently talking');
+    }
+  }, [talking]);
+  */
+
   // sending our prompt to the backend!
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,8 +99,13 @@ export default function App() {
       </form>
 
       <span className="reactMarkdown">
+        {talking && (
+          <div className="scroll-prompt" id="js_scrollPrompt">
+            <div className="scroll-prompt-shape"></div>
+          </div>
+        )}
         <ReactMarkdown>{response}</ReactMarkdown>
-        <AlwaysScrollToBottom />
+        {/* <AlwaysScrollToBottom /> */}
       </span>
 
       <span

@@ -1,0 +1,8 @@
+{
+  "appId": "com.vetiq.app",
+  "appName": "vetiq",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  }
+}
