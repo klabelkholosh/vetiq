@@ -256,6 +256,7 @@ img {
   background-color: $react-markdown-bgcolor;
   color: $react-markdown-textcolor;
   margin-bottom: 100px;
+  overflow-x: hidden;
   @media screen and (max-width: 768px) {
     width: 80%;
     margin: 10vw;

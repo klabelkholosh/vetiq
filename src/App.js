@@ -39,6 +39,7 @@ export default function App() {
         if (updateMsg !== '[[DONE]]') {
           // continue adding to response, dog is now talking..
           setTalking(true);
+          console.log(`|${updateMsg}|`);
           setResponse((r) => r + updateMsg);
         } else {
           // response is done, dog stops talking, and close the eventsource!
