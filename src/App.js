@@ -3,6 +3,7 @@ import './styles/App.scss';
 import logo from './images/vetiq.svg';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import DogCSS from './components/DogCSS';
+import { Plugins } from '@capacitor/core';
 
 export default function App() {
   const [prompt, setPrompt] = React.useState('');
@@ -20,6 +21,19 @@ export default function App() {
     }
   }, [talking]);
   */
+
+  const { VetIqPlugin } = Plugins;
+
+  const makePurchase = async () => {
+    try {
+      console.log('VetIqPlugin: ', VetIqPlugin);
+
+      const result = await VetIqPlugin.makePurchase();
+      console.log('Purchase successful:', result);
+    } catch (error) {
+      console.error('Purchase failed:', error);
+    }
+  };
 
   // sending our prompt to the backend!
   const handleSubmit = (e) => {
@@ -117,6 +131,7 @@ export default function App() {
           )
         }
         onMouseOut={() => setHelpContent('?')}
+        onClick={() => makePurchase()}
       >
         {helpContent}
       </span>
