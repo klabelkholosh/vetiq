@@ -3,6 +3,7 @@
 /* ------------------------------ */
 
 $font-size-textarea: 16px;
+$font-size-privpol: 10px;
 $font-size-button: 20px;
 $color-logodark: #1a1b1d;
 $color-font-main: #add9f4;
@@ -246,6 +247,16 @@ img {
     padding-top: 50px;
     width: 180px;
   }
+}
+
+.privacyPolicy {
+  position: fixed;
+  top: 10%;
+  left: 5vw;
+  font-size: $font-size-privpol;
+  height: 80vh;
+  width: 80vw;
+  overflow: scroll;
 }
 
 .reactMarkdown {

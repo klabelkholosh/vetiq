@@ -14,6 +14,7 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		633321F12B5B0A980011A376 /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 633321F02B5B0A980011A376 /* StoreKitTestCertificate.cer */; };
 		63935B9A2AC453DB0034A954 /* StoreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63935B992AC453DB0034A954 /* StoreVM.swift */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		633321F02B5B0A980011A376 /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = StoreKitTestCertificate.cer; path = ../../../../../../../Downloads/StoreKitTestCertificate.cer; sourceTree = "<group>"; };
 		63935B972AC44CFE0034A954 /* vetiq.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = vetiq.storekit; sourceTree = "<group>"; };
 		63935B992AC453DB0034A954 /* StoreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreVM.swift; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
 				63935B972AC44CFE0034A954 /* vetiq.storekit */,
+				633321F02B5B0A980011A376 /* StoreKitTestCertificate.cer */,
 				63935B992AC453DB0034A954 /* StoreVM.swift */,
 			);
 			path = App;
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */,
+				633321F12B5B0A980011A376 /* StoreKitTestCertificate.cer in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,

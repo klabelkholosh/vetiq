@@ -4,6 +4,8 @@ import logo from './images/vetiq.svg';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import DogCSS from './components/DogCSS';
 import { Plugins } from '@capacitor/core';
+import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
+import { PRIV_POL } from './consts';
 
 export default function App() {
   const [prompt, setPrompt] = React.useState('');
@@ -11,7 +13,18 @@ export default function App() {
   const [loading, setLoading] = React.useState(false);
   const [talking, setTalking] = React.useState(false);
   const [helpContent, setHelpContent] = React.useState('?');
+  const [showPrivPol, setPrivPol] = React.useState(false);
 
+  // on app load, initialize RevenueCat Purchases config
+  React.useEffect(() => {
+    (async function () {
+      await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG }); // Enable to get debug logs
+      await Purchases.configure({
+        apiKey: 'appl_YTbTyIFrEPyDnWxUVOdSLyptbpR',
+        appUserID: 'appba65119ce4', // Optional
+      });
+    })();
+  }, []);
   /*
   React.useEffect(() => {
     if (talking) {
@@ -22,16 +35,40 @@ export default function App() {
   }, [talking]);
   */
 
-  const { VetIqPlugin } = Plugins;
-
   const makePurchase = async () => {
     try {
-      console.log('VetIqPlugin: ', VetIqPlugin);
+      console.log('Purchases: ', Purchases);
 
-      const result = await VetIqPlugin.makePurchase();
+      const result = await Purchases.makePurchase();
       console.log('Purchase successful:', result);
     } catch (error) {
       console.error('Purchase failed:', error);
+    }
+  };
+
+  const showPurchases = async () => {
+    try {
+      console.log('showPurchases begin');
+      const offerings = await Purchases.getOfferings();
+      if (
+        offerings.current !== null &&
+        offerings.current.availablePackages.length !== 0
+      ) {
+        // Display packages for sale
+        console.log('packages!', offerings.current);
+      }
+      console.log('showPurchases end');
+    } catch (error) {
+      console.log('error!');
+      // Handle error
+    }
+  };
+
+  const showPrivacyPolicy = async () => {
+    if (!showPrivPol) {
+      setPrivPol(true);
+    } else {
+      setPrivPol(false);
     }
   };
 
@@ -127,14 +164,26 @@ export default function App() {
         className="helpIcon"
         onMouseOver={() =>
           setHelpContent(
-            "This is a BETA - responses aren't medical advice, and could be weird. Working on it!"
+            "This is a BETA - responses aren't medical advice, and could be weird. Working on it! Press this window again for the Privacy Policy."
           )
         }
         onMouseOut={() => setHelpContent('?')}
-        onClick={() => makePurchase()}
+        onClick={() => showPurchases() && showPrivacyPolicy()}
       >
         {helpContent}
       </span>
+
+      {showPrivPol && (
+        <span>
+          <textarea
+            className="privacyPolicy"
+            cols="80"
+            rows="5"
+            onClick={() => showPrivacyPolicy()}
+            value={PRIV_POL}
+          />
+        </span>
+      )}
     </div>
   );
 }
